@@ -1,14 +1,21 @@
 package com.example.malayalamdialoguesquiz;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +34,10 @@ import java.util.Random;
 
 public class FirstFragment extends Fragment {
 
+    MainActivity main_act = (MainActivity) getActivity();
+
     boolean is_counter_running = false;
+    CountDownTimer countDownTimer;
 
     @Override
     public View onCreateView(
@@ -70,9 +80,22 @@ public class FirstFragment extends Fragment {
             while (line != null) {
                 line = reader.readLine();
                 while (true) {
+                    System.out.println("printed just inside while");
+                    if(line == null)
+                        System.out.print("line is null");
+                    else if (line.contains("\t")){
+                        System.out.println("line has tabbed character");
+                        System.out.println("and that line is: " + line);
+                    }
+                    else
+                    {
+                        System.out.println("some other problem");
+                    }
                     if (line != null && !line.contains("\t")) {
+                        System.out.println("printed just inside if condition");
                         stringBuffer.append(line);
                         stringBuffer.append("\n");
+                        System.out.println("line: " + stringBuffer.toString());
                         line = reader.readLine();
                     } else
                         break;
@@ -82,6 +105,7 @@ public class FirstFragment extends Fragment {
                 }
                 String[] final_line = line.split("\t");
                 stringBuffer.append(final_line[0]);
+                System.out.println("stringBuffer: " + stringBuffer.toString());
                 movie_data.add(new MovieData(stringBuffer.toString(), final_line[1]));
                 stringBuffer.delete(0, stringBuffer.length());
             }
@@ -122,17 +146,34 @@ public class FirstFragment extends Fragment {
         if (dialogue_view == null){
             System.out.println("dialogue_view is null");
         }
-        dialogue_view.setText(dialogue);
+        else {
+            dialogue_view.setText(dialogue);
+            // show slide animation for textview
+            Animation RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
+            ScrollView scrollView = view.findViewById(R.id.scrollView2);
+            scrollView.startAnimation(RightSwipe);
+        }
     }
 
     private Integer set_options_text(View view, ArrayList<String> movie_list, String correct_answer ){
         Integer ans_index;
         Random rand = new Random();
-
         final Button _option1 = view.findViewById(R.id.option1);
         final Button _option2 = view.findViewById(R.id.option2);
         final Button _option3 = view.findViewById(R.id.option3);
         final Button _option4 = view.findViewById(R.id.option4);
+
+        //give animation to options
+        Animation RightSwipe;
+        RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option1);
+        _option1.startAnimation(RightSwipe);
+        RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option2);
+        _option2.startAnimation(RightSwipe);
+        RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option3);
+        _option3.startAnimation(RightSwipe);
+        RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option4);
+        _option4.startAnimation(RightSwipe);
+
         Collections.shuffle(movie_list);
         for (int i=0, count = 0; count<4 && i < movie_list.size(); i++) {
             if (movie_list.get(i) == correct_answer)
@@ -207,64 +248,98 @@ public class FirstFragment extends Fragment {
         else if (strike_count[0] ==3){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal3);
             img.setImageResource(R.drawable.strike);
-            NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
         }
     }
 
-    public void next_qcard_event(final View view, final Integer[] count, final ArrayList<MovieData> movie_data, final ArrayList<String> movie_list, final Integer[] ans_idx, final Integer[] strike_count){
+    private void strike_count_three_event(){
+        countDownTimer.cancel();
         is_counter_running = false;
-        count[0]++;
-        TextView q_count =  view.getRootView().findViewById(R.id.q_count);
-        q_count.setText(count[0].toString());
-        if(view == null)
-            System.out.println("view is null");
-
-        set_question_text(view.getRootView(), movie_data.get(count[0]-1).dialogue.toString());
-        ans_idx[0] = set_options_text(view.getRootView(), movie_list, movie_data.get(count[0]-1).movie.toString());
-        view.findViewById(R.id.option1).setBackgroundResource(android.R.drawable.btn_default);
-        view.findViewById(R.id.option2).setBackgroundResource(android.R.drawable.btn_default);
-        view.findViewById(R.id.option3).setBackgroundResource(android.R.drawable.btn_default);
-        view.findViewById(R.id.option4).setBackgroundResource(android.R.drawable.btn_default);
-
-        new CountDownTimer(10000, 1000) {
-        
-            public void onTick(long millisUntilFinished) {
-                TextView cdt = view.findViewById(R.id.count_down_timer);
-                cdt.setText("" + millisUntilFinished/1000);
-            }
-
-            public void onFinish() {
-                is_counter_running = false;
-                TextView cdt = view.findViewById(R.id.count_down_timer);
-                cdt.setText("FIN");
-                strike_count[0]++;
-                set_strike_color(view, strike_count);
-                next_qcard_event(view, count, movie_data, movie_list, ans_idx, strike_count);
-            }
-        }.start();
+        NavHostFragment.findNavController(FirstFragment.this)
+                .navigate(R.id.action_FirstFragment_to_SecondFragment);
     }
 
-    private void set_count_down_timer(final View view, final Integer[] strike_count){
-        new CountDownTimer(10000, 1000) {
+    public void next_qcard_event(final View view, final Integer[] count, final ArrayList<MovieData> movie_data, final ArrayList<String> movie_list, final Integer[] ans_idx, final Integer[] strike_count){
+        if(is_counter_running && countDownTimer != null){
+            countDownTimer.cancel();
+            is_counter_running = false;
+        }
 
-            public void onTick(long millisUntilFinished) {
-                TextView cdt = view.findViewById(R.id.count_down_timer);
-                cdt.setText("" + millisUntilFinished/1000);
-            }
+        count[0]++;
+        TextView q_count =  view.findViewById(R.id.q_count);
+        q_count.setText(count[0].toString());
 
-            public void onFinish() {
-                TextView cdt = view.findViewById(R.id.count_down_timer);
-                cdt.setText("FIN");
-                strike_count[0]++;
-                set_strike_color(view.getRootView(), strike_count);
-            }
-        }.start();
 
+        if(view == null)
+            System.out.println("view is null");
+        else {
+            set_question_text(view.getRootView(), movie_data.get(count[0] - 1).dialogue.toString());
+            ans_idx[0] = set_options_text(view.getRootView(), movie_list, movie_data.get(count[0] - 1).movie.toString());
+            view.findViewById(R.id.option1).setBackgroundResource(R.drawable.rounded_button);
+            view.findViewById(R.id.option2).setBackgroundResource(R.drawable.rounded_button);
+            view.findViewById(R.id.option3).setBackgroundResource(R.drawable.rounded_button);
+            view.findViewById(R.id.option4).setBackgroundResource(R.drawable.rounded_button);
+
+
+            is_counter_running = true;
+            countDownTimer = new CountDownTimer(main_act.time_for_round + 1000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    TextView cdt = view.findViewById(R.id.count_down_timer);
+                    if (view.findViewById(R.id.count_down_timer) == null) {
+                        countDownTimer.cancel();
+                    } else {
+                        System.out.println("view cdt is not null");
+                        cdt.setText("" + millisUntilFinished / 1000);
+                    }
+                }
+
+                public void onFinish() {
+                    is_counter_running = false;
+                    TextView cdt = view.findViewById(R.id.count_down_timer);
+                    cdt.setText("FIN");
+                    strike_count[0]++;
+                    set_strike_color(view, strike_count);
+                    if (strike_count[0] == 3)
+                        strike_count_three_event();
+                    else if (view.findViewById(R.id.option1) != null) {
+                        next_qcard_event(view, count, movie_data, movie_list, ans_idx, strike_count);
+                    }
+                }
+            }.start();
+        }
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // set a random bg_image
+        Random rand = new Random();
+        Integer rand_bg_idx = rand.nextInt(7);
+        ImageView ingame_bg = view.findViewById(R.id.in_game_bg);
+        switch (rand_bg_idx){
+            case 0:
+                ingame_bg.setImageResource(R.drawable.in_game_bg);
+                break;
+            case 1:
+                ingame_bg.setImageResource(R.drawable.in_game_bg2);
+                break;
+            case 2:
+                ingame_bg.setImageResource(R.drawable.in_game_bg3);
+                break;
+            case 3:
+                ingame_bg.setImageResource(R.drawable.in_game_bg4);
+                break;
+            case 4:
+                ingame_bg.setImageResource(R.drawable.in_game_bg5);
+                break;
+            case 5:
+                ingame_bg.setImageResource(R.drawable.in_game_bg6);
+                break;
+            case 6:
+                ingame_bg.setImageResource(R.drawable.in_game_bg7);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + rand_bg_idx);
+        }
 
         final Integer[] ans_idx = new Integer[1];
         final Integer[] count = {0};
@@ -286,7 +361,10 @@ public class FirstFragment extends Fragment {
                else{
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
-               }
+                   if(strike_count[0] == 3)
+                       strike_count_three_event();
+                   else
+                       next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);               }
 
             }
         });
@@ -297,11 +375,15 @@ public class FirstFragment extends Fragment {
                 color_the_answers(view.getRootView(), ans_idx[0]);
                 if (check_ans_with_button(ans_idx, 2)) {
                     next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
+
                 }
                 else{
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
-                }
+                    if(strike_count[0] == 3)
+                        strike_count_three_event();
+                    else
+                        next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);                }
 
             }
         });
@@ -316,6 +398,10 @@ public class FirstFragment extends Fragment {
                 else{
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
+                    if(strike_count[0] == 3)
+                        strike_count_three_event();
+                    else
+                        next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
                 }
 
             }
@@ -331,7 +417,10 @@ public class FirstFragment extends Fragment {
                 else{
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
-                }
+                    if(strike_count[0] == 3)
+                        strike_count_three_event();
+                    else
+                        next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);                }
 
             }
         });
