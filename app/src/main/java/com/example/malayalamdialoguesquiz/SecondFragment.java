@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import org.w3c.dom.Text;
 
 public class SecondFragment extends Fragment {
 
@@ -22,6 +25,9 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MainActivity main_act = (MainActivity) getActivity();
+        TextView score_display = view.findViewById(R.id.score_display);
+        score_display.setText("നിങ്ങളുടെ മൊത്തം സ്കോർ: " + main_act.final_score );
 
         view.findViewById(R.id.to_menu_btn).setOnClickListener(new View.OnClickListener() {
             @Override

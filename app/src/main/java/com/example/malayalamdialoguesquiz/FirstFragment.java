@@ -1,10 +1,12 @@
 package com.example.malayalamdialoguesquiz;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,6 +42,16 @@ public class FirstFragment extends Fragment {
     boolean is_counter_running = false;
     CountDownTimer countDownTimer;
 
+    //handle back button press event:
+//    @Override
+//    public void onBackPressed(){
+//        countDownTimer.cancel();
+//        is_counter_running = false;
+//        System.out.println("back button pressed");
+//        NavHostFragment.findNavController(FirstFragment.this)
+//                .navigate(R.id.action_FirstFragment_to_game_mode);
+//    }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -60,6 +73,27 @@ public class FirstFragment extends Fragment {
         }
         public void set_movie(String movie){
             this.movie = movie;
+        }
+    }
+
+    public void store_data_in_local_memory(){
+        System.out.println("data saved to local memory");
+        SharedPreferences settings = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("is_santosh_pandit_round_unlocked", true);
+
+        Toast toast = Toast.makeText(getContext(),"സന്തോഷ് പണ്ഡിറ്റ് റൗണ്ട് അൺലോക്ക് ചെയ്തിരിക്കുന്നു!", Toast.LENGTH_SHORT);
+        toast.setMargin(0,0);
+        toast.show();
+
+    // Apply the edits!
+        editor.apply();
+    }
+
+    private void if_shaji_kailas_round_won(){
+        if(main_act.final_score >= 100 && main_act.time_for_round == 5000){
+            store_data_in_local_memory();
         }
     }
 
@@ -176,7 +210,7 @@ public class FirstFragment extends Fragment {
 
         Collections.shuffle(movie_list);
         for (int i=0, count = 0; count<4 && i < movie_list.size(); i++) {
-            if (movie_list.get(i) == correct_answer)
+            if (movie_list.get(i).equals(correct_answer))
                 i++;
             else {
                 if (count == 0) {
@@ -251,9 +285,11 @@ public class FirstFragment extends Fragment {
         }
     }
 
-    private void strike_count_three_event(){
+    private void strike_count_three_event(Integer[] count){
         countDownTimer.cancel();
         is_counter_running = false;
+        main_act.final_score = count[0] - 3;
+        if_shaji_kailas_round_won();
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment);
     }
@@ -299,7 +335,7 @@ public class FirstFragment extends Fragment {
                     strike_count[0]++;
                     set_strike_color(view, strike_count);
                     if (strike_count[0] == 3)
-                        strike_count_three_event();
+                        strike_count_three_event(count);
                     else if (view.findViewById(R.id.option1) != null) {
                         next_qcard_event(view, count, movie_data, movie_list, ans_idx, strike_count);
                     }
@@ -309,6 +345,7 @@ public class FirstFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
         // set a random bg_image
@@ -362,7 +399,7 @@ public class FirstFragment extends Fragment {
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                    if(strike_count[0] == 3)
-                       strike_count_three_event();
+                       strike_count_three_event(count);
                    else
                        next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);               }
 
@@ -381,7 +418,7 @@ public class FirstFragment extends Fragment {
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
-                        strike_count_three_event();
+                        strike_count_three_event(count);
                     else
                         next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);                }
 
@@ -399,7 +436,7 @@ public class FirstFragment extends Fragment {
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
-                        strike_count_three_event();
+                        strike_count_three_event(count);
                     else
                         next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
                 }
@@ -418,7 +455,7 @@ public class FirstFragment extends Fragment {
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
-                        strike_count_three_event();
+                        strike_count_three_event(count);
                     else
                         next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);                }
 

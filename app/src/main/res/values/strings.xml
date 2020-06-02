@@ -7,8 +7,30 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_first_fragment">
+        ശ്രീനിവാസൻ: പറയെടാ... നീ അമേരിക്കയിൽ എവിടെയായിരുന്നു?
+മോഹൻലാൽ: അമേരിക്കയിൽ... അതുപിന്നെ അമേരിക്കൻ ജംഗ്ഷനിൽ!
+ശ്രീനിവാസൻ: ഹ ഹ ഹ... അമേരിക്കയിൽ അങ്ങോനൊരു സ്ഥലമേ ഇല്ല..!!
+മോഹൻലാൽ: എന്ത് വിഢിത്തമാണീ പറയുന്നേ.. ജംഗ്ഷനില്ലാത്ത നാടുണ്ടോ?!
+...
+ശ്രീനിവാസൻ: How many kilometers from Washington D.C. to Miami Beach?
+മോഹൻലാൽ: I am the answers. Kilometers and kilometers.. In these days of degenerating decencies of Miami beach to Washington when diplomacy and duplicity become interchangeability of from complicated from America to America.
+...
+മോഹൻലാൽ: You talking too much.I kick your face and getout.You talking nonsense in the house of my wife, mother and father.Uncle, send him out, out house, go go go, go away..
+ജഗതി: Go away stupid, In the house of my wife and daughter, you will not see any minute of the today, GET OUTHOUSE. GET OUTHOUSE.
+    </string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="how_to_play">
+        \n\nഈ കളി എങ്ങനെ കളിക്കാം?\n\n
+
+പ്ലേ ബട്ടൺ (വട്ടത്തിനകത്തു ത്രികോണമുള്ള ഐക്കൺ)  അമർത്തി നിങ്ങൾക്ക് ഗെയിം മോഡ് തിരഞ്ഞെടുക്കാം. ഗെയിം മോഡ് മൂന്ന് വിധേനയാണ്:\n\n
+\'ഷാജി കൈലാസ്\' റൗണ്ടിൽ ഓരോ ഡയലോഗും ഏതു സിനിമയിൽ നിന്നാണെന്ന് ഊഹിക്കാൻ 5 സെക്കന്റ് മാത്രമേ നിങ്ങൾക്ക് ലഭിക്കുകയുള്ളൂ. \'സാധാ\' റൗണ്ടിൽ നിങ്ങൾക്ക് 15 സെക്കൻഡുകൾ കിട്ടുന്നതാണ്. അതെ സമയം \'അമൽ നീരദ്\' റൗണ്ടിൽ 30 സെക്കന്റോളം നിങ്ങൾക്ക് ഓരോ ഡയലോഗിനും എടുക്കാവുന്നതാണ്. എത്ര സമയം ബാക്കിയുണ്ടെന്ന് കാണുവാൻ കളി സ്‌ക്രീനിന്റെ മുകളിൽ വലത്തു വശം നോക്കിയാൽ മതി.
+മൂന്ന് തവണ തെറ്റുത്തരം നൽകിയാൽ കളി അവസാനിക്കും. ഓരോ തവണ തെറ്റുത്തരം നൽകുമ്പോഴും കളിയിലെ ഓരോ പച്ച സിഗ്നലും ചുവപ്പു സിഗ്നൽ ആയി മാറുന്നു.
+\n\n
+സന്തോഷ് പണ്ഡിറ്റ് റൗണ്ട് എന്താണ്?\n\n
+
+ഈ കളിയിലെ ഏറ്റവും ബുദ്ധിമുട്ടേറിയ ഗെയിം മോഡ് ആൺ \'സന്തോഷ് പണ്ഡിറ്റ്\' റൗണ്ട്. ഓരോ ഡയലോഗിനും നിങ്ങൾക്ക് 2 സെക്കന്റ് മാത്രമേ ഊഹിക്കാൻ സമയം ലഭിക്കൂ. ഈ റൗണ്ട് അൺലോക്ക് ചെയ്യണമെങ്കിൽ ഷാജി കൈലാസ് റൗണ്ടിൽ നിങ്ങൾ 100-നു മുകളിൽ സ്കോർ നേടണം.
+    </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

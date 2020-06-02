@@ -1,5 +1,6 @@
 package com.example.malayalamdialoguesquiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,8 +10,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 /**
@@ -27,8 +31,7 @@ public class menu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageButton play_btn;
-
+    private ImageButton play_btn, settings_btn, exit_btn, share_btn, rate_btn, credits_btn;
     public menu() {
         // Required empty public constructor
     }
@@ -69,6 +72,9 @@ public class menu extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Animation swing, swing_slow;
+        swing = AnimationUtils.loadAnimation(getContext(), R.anim.pendulum);
+        swing_slow = AnimationUtils.loadAnimation(getContext(), R.anim.pendulum_slow);
         if(view == null){
             System.out.println("view is null");
         }
@@ -83,6 +89,46 @@ public class menu extends Fragment {
                         .navigate(R.id.action_menu_to_game_mode);
             }
         });
+        play_btn.startAnimation(swing);
+
+        exit_btn = view.findViewById(R.id.exit_button);
+        exit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().moveTaskToBack(true);
+                getActivity().finish();
+            }
+        });
+
+        credits_btn = view.findViewById(R.id.credits_button);
+        credits_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(menu.this)
+                        .navigate(R.id.action_menu_to_credits);
+            }
+        });
+
+        share_btn = view.findViewById(R.id.share_button);
+        share_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "Hey! check out Malayalam Dialogue Quiz app on Google Playstore. I think you will like it!";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
+
+        settings_btn = view.findViewById(R.id.settings_button);
+        settings_btn.startAnimation(swing);
+
+
+        //animate title
+        TextView menu_title = view.findViewById(R.id.menu_title);
+        menu_title.startAnimation(swing_slow);
     }
 
 }

@@ -5,4 +5,5 @@
     <color name="colorAccent">#00B0FF</color>
     <color name="correct_answer_green">#AED581</color>
     <color name="wrong_answer_red">#e57373</color>
+    <color name="disabled_button">#404040</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.malayalamdialoguesquiz;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 
 /**
@@ -27,6 +30,7 @@ public class game_mode extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    MainActivity main_act = (MainActivity) getActivity();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,6 +63,16 @@ public class game_mode extends Fragment {
         return fragment;
     }
 
+    private boolean get_data_from_memory(){
+        // Get from the SharedPreferences
+        System.out.println("invoked get_data_from_memory method");
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        Boolean val = sharedPreferences.getBoolean("is_santosh_pandit_round_unlocked", false);
+        System.out.println("sp_active = " + val.toString());
+        return val;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +90,7 @@ public class game_mode extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
         Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(),"manjari_regular.ttf");
         super.onViewCreated(view, savedInstanceState);
         if(view == null){
@@ -130,15 +145,29 @@ public class game_mode extends Fragment {
         santosh_pandit_btn.setTypeface(typeFace);
         RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option1);
         santosh_pandit_btn.startAnimation(RightSwipe);
-        santosh_pandit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity main_act = (MainActivity) getActivity();
-                main_act.time_for_round = 2000;
-                NavHostFragment.findNavController(game_mode.this)
-                        .navigate(R.id.action_game_mode_to_FirstFragment);
-            }
-        });
+
+        //set santosh pandit on or off
+        main_act.is_sp_active = get_data_from_memory();
+        if (!main_act.is_sp_active)
+            santosh_pandit_btn.setTextColor(getResources().getColor(R.color.disabled_button));
+
+            santosh_pandit_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(main_act.is_sp_active) {
+                        MainActivity main_act = (MainActivity) getActivity();
+                        main_act.time_for_round = 2000;
+                        NavHostFragment.findNavController(game_mode.this)
+                                .navigate(R.id.action_game_mode_to_FirstFragment);
+                    }
+                    else{
+                        Toast toast = Toast.makeText(getContext(),"ഷാജി കൈലാസ് റൗണ്ടിൽ നൂറിന് മുകളിൽ സ്കോർ ചെയ്താൽ " +
+                                "മാത്രമേ ഈ റൗണ്ട് അൺലോക്ക് ആവൂ.", Toast.LENGTH_SHORT);
+                        toast.setMargin(0,0);
+                        toast.show();
+                    }
+                }
+            });
 
         back_button = view.findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
