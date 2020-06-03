@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -75,11 +76,19 @@ public class menu extends Fragment {
         Animation swing, swing_slow;
         swing = AnimationUtils.loadAnimation(getContext(), R.anim.pendulum);
         swing_slow = AnimationUtils.loadAnimation(getContext(), R.anim.pendulum_slow);
+
+        if (((MainActivity) getActivity()).is_sound_on(0))
+            ((MainActivity) getActivity()).backgroundPlayer.startBackgroundMusic();
+        else
+            ((MainActivity) getActivity()).backgroundPlayer.stopBackgroundMusic();
+
         if(view == null){
             System.out.println("view is null");
         }
         else if (view.findViewById(R.id.play_button) == null)
             System.out.println("play_button id is null");
+
+        // change menu_title if game won
 
         play_btn = view.findViewById(R.id.play_button);
         play_btn.setOnClickListener(new View.OnClickListener() {
@@ -123,11 +132,33 @@ public class menu extends Fragment {
         });
 
         settings_btn = view.findViewById(R.id.settings_button);
+        settings_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(menu.this)
+                        .navigate(R.id.action_menu_to_settings);
+            }
+        });
         settings_btn.startAnimation(swing);
+
+        rate_btn = view.findViewById(R.id.rate_button);
+        rate_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(getContext(),"ആപ്പ് ഇഷ്ടമായെങ്കിൽ പ്ലേസ്റ്റോറിൽ റേറ്റ് ചെയ്യാൻ മറക്കരുത്. അവിടെ നിങ്ങൾക്ക് " +
+                        "എന്നോട് ഈ ആപ്പിൽ ഇഷ്ടമില്ലാത്തതും ഇഷ്ടമുള്ളതുമായ കാര്യങ്ങൾ പങ്കുവെക്കാം, കൂടുതൽ ഫീച്ചേർസ് ആവശ്യപ്പെടാം. " +
+                        "ഞാൻ അതിനനുസരിച്ച് ഇത് അപ്ഡേറ്റ് ചെയ്യുന്നതാണ്.", Toast.LENGTH_LONG);
+                toast.setMargin(0,0);
+                toast.show();
+            }
+        });
 
 
         //animate title
         TextView menu_title = view.findViewById(R.id.menu_title);
+        MainActivity main_act = (MainActivity) getActivity();
+        if(main_act.is_game_won)
+            menu_title.setText("ങ്ങള് ഒരു വൻ സംഭവാ ട്ടോ! \uD83D\uDC51");
         menu_title.startAnimation(swing_slow);
     }
 

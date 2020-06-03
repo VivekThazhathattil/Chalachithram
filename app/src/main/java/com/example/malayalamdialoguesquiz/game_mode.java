@@ -30,7 +30,6 @@ public class game_mode extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    MainActivity main_act = (MainActivity) getActivity();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -40,6 +39,8 @@ public class game_mode extends Fragment {
     private Button shaji_kailas_btn;
     private Button santosh_pandit_btn;
     private ImageButton back_button;
+    MainActivity main_act = (MainActivity) getActivity();
+
 
     public game_mode() {
         // Required empty public constructor
@@ -90,7 +91,6 @@ public class game_mode extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
         Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(),"manjari_regular.ttf");
         super.onViewCreated(view, savedInstanceState);
         if(view == null){
@@ -107,6 +107,7 @@ public class game_mode extends Fragment {
             @Override
             public void onClick(View view) {
                 MainActivity main_act = (MainActivity) getActivity();
+                main_act.play_sfx(1);
                 main_act.time_for_round = 30000;
                 NavHostFragment.findNavController(game_mode.this)
                         .navigate(R.id.action_game_mode_to_FirstFragment);
@@ -121,6 +122,7 @@ public class game_mode extends Fragment {
             @Override
             public void onClick(View view) {
                 MainActivity main_act = (MainActivity) getActivity();
+                main_act.play_sfx(1);
                 main_act.time_for_round = 15000;
                 NavHostFragment.findNavController(game_mode.this)
                         .navigate(R.id.action_game_mode_to_FirstFragment);
@@ -135,6 +137,7 @@ public class game_mode extends Fragment {
             @Override
             public void onClick(View view) {
                 MainActivity main_act = (MainActivity) getActivity();
+                main_act.play_sfx(1);
                 main_act.time_for_round = 5000;
                 NavHostFragment.findNavController(game_mode.this)
                         .navigate(R.id.action_game_mode_to_FirstFragment);
@@ -156,6 +159,7 @@ public class game_mode extends Fragment {
                 public void onClick(View view) {
                     if(main_act.is_sp_active) {
                         MainActivity main_act = (MainActivity) getActivity();
+                        main_act.play_sfx(1);
                         main_act.time_for_round = 2000;
                         NavHostFragment.findNavController(game_mode.this)
                                 .navigate(R.id.action_game_mode_to_FirstFragment);

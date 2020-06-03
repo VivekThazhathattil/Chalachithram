@@ -27,7 +27,7 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         MainActivity main_act = (MainActivity) getActivity();
         TextView score_display = view.findViewById(R.id.score_display);
-        score_display.setText("നിങ്ങളുടെ മൊത്തം സ്കോർ: " + main_act.final_score );
+        score_display.setText("നിങ്ങളുടെ സ്കോർ: " + main_act.final_score );
 
         view.findViewById(R.id.to_menu_btn).setOnClickListener(new View.OnClickListener() {
             @Override

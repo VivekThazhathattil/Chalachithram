@@ -53,6 +53,11 @@
             app:destination="@id/credits"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_menu_to_settings"
+            app:destination="@id/settings"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/game_mode"
@@ -88,6 +93,17 @@
         tools:layout="@layout/fragment_credits" >
         <action
             android:id="@+id/action_credits_to_menu"
+            app:destination="@id/menu"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.malayalamdialoguesquiz.settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_menu"
             app:destination="@id/menu"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out" />

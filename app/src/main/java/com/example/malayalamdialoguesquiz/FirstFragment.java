@@ -2,7 +2,10 @@ package com.example.malayalamdialoguesquiz;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -21,6 +24,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -37,7 +41,7 @@ import java.util.Random;
 
 public class FirstFragment extends Fragment {
 
-    MainActivity main_act = (MainActivity) getActivity();
+//    ImageView ig_bg;
 
     boolean is_counter_running = false;
     CountDownTimer countDownTimer;
@@ -81,18 +85,27 @@ public class FirstFragment extends Fragment {
         SharedPreferences settings = PreferenceManager
                 .getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("is_santosh_pandit_round_unlocked", true);
-
-        Toast toast = Toast.makeText(getContext(),"സന്തോഷ് പണ്ഡിറ്റ് റൗണ്ട് അൺലോക്ക് ചെയ്തിരിക്കുന്നു!", Toast.LENGTH_SHORT);
-        toast.setMargin(0,0);
-        toast.show();
-
-    // Apply the edits!
+        if(((MainActivity) getActivity()).final_score >= 100 && ((MainActivity) getActivity()).time_for_round == 5000) {
+            editor.putBoolean("is_santosh_pandit_round_unlocked", true);
+            Toast toast = Toast.makeText(getContext(), "സന്തോഷ് പണ്ഡിറ്റ് റൗണ്ട് അൺലോക്ക് ചെയ്തിരിക്കുന്നു!", Toast.LENGTH_LONG);
+            toast.setMargin(0, 0);
+            toast.show();
+        }
+        else if (((MainActivity) getActivity()).final_score >= 200 && ((MainActivity) getActivity()).time_for_round == 2000) {
+            editor.putBoolean("is_game_won", true);
+            Toast toast = Toast.makeText(getContext(), "നിങ്ങൾ ഗെയിം വിജയിച്ചിരിക്കുന്നു!!!!", Toast.LENGTH_LONG);
+            toast.setMargin(0, 0);
+            toast.show();
+        }
+            // Apply the edits!
         editor.apply();
     }
 
     private void if_shaji_kailas_round_won(){
-        if(main_act.final_score >= 100 && main_act.time_for_round == 5000){
+        if(((MainActivity) getActivity()).final_score >= 100 && ((MainActivity) getActivity()).time_for_round == 5000){
+            store_data_in_local_memory();
+        }
+        else if (((MainActivity) getActivity()).final_score >= 200 && ((MainActivity) getActivity()).time_for_round == 2000){
             store_data_in_local_memory();
         }
     }
@@ -288,7 +301,7 @@ public class FirstFragment extends Fragment {
     private void strike_count_three_event(Integer[] count){
         countDownTimer.cancel();
         is_counter_running = false;
-        main_act.final_score = count[0] - 3;
+        ((MainActivity) getActivity()).final_score = count[0] - 3;
         if_shaji_kailas_round_won();
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment);
@@ -317,7 +330,7 @@ public class FirstFragment extends Fragment {
 
 
             is_counter_running = true;
-            countDownTimer = new CountDownTimer(main_act.time_for_round + 1000, 1000) {
+            countDownTimer = new CountDownTimer(((MainActivity) getActivity()).time_for_round + 1000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     TextView cdt = view.findViewById(R.id.count_down_timer);
                     if (view.findViewById(R.id.count_down_timer) == null) {
@@ -329,6 +342,7 @@ public class FirstFragment extends Fragment {
                 }
 
                 public void onFinish() {
+                    ((MainActivity) getActivity()).play_sfx(2);
                     is_counter_running = false;
                     TextView cdt = view.findViewById(R.id.count_down_timer);
                     cdt.setText("FIN");
@@ -393,10 +407,12 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 color_the_answers(view.getRootView(), ans_idx[0]);
                if (check_ans_with_button(ans_idx, 1)) {
+                   ((MainActivity) getActivity()).play_sfx(3);
                    next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
                }
                else{
-                    strike_count[0] += 1;
+                   ((MainActivity) getActivity()).play_sfx(2);
+                   strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                    if(strike_count[0] == 3)
                        strike_count_three_event(count);
@@ -411,10 +427,12 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 color_the_answers(view.getRootView(), ans_idx[0]);
                 if (check_ans_with_button(ans_idx, 2)) {
+                    ((MainActivity) getActivity()).play_sfx(3);
                     next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
 
                 }
                 else{
+                    ((MainActivity) getActivity()).play_sfx(2);
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
@@ -430,9 +448,11 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 color_the_answers(view.getRootView(), ans_idx[0]);
                 if (check_ans_with_button(ans_idx, 3)) {
+                    ((MainActivity) getActivity()).play_sfx(3);
                     next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
                 }
                 else{
+                    ((MainActivity) getActivity()).play_sfx(2);
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
@@ -449,9 +469,11 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 color_the_answers(view.getRootView(), ans_idx[0]);
                 if (check_ans_with_button(ans_idx, 4)) {
+                    ((MainActivity) getActivity()).play_sfx(3);
                     next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
                 }
                 else{
+                    ((MainActivity) getActivity()).play_sfx(2);
                     strike_count[0] += 1;
                     set_strike_color(view.getRootView(), strike_count);
                     if(strike_count[0] == 3)
