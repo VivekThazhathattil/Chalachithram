@@ -122,21 +122,24 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/no_strike" />
+            android:padding="5dp"
+            android:src="@drawable/ic_no_strike" />
 
         <ImageView
             android:id="@+id/strike_signal2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/no_strike" />
+            android:padding="5dp"
+            android:src="@drawable/ic_no_strike" />
 
         <ImageView
             android:id="@+id/strike_signal3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/no_strike" />
+            android:padding="5dp"
+            android:src="@drawable/ic_no_strike" />
 
         <TextView
             android:id="@+id/q_count"

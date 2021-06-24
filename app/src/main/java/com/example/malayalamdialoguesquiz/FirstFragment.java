@@ -288,13 +288,13 @@ public class FirstFragment extends Fragment {
     private void set_strike_color(View view, Integer[] strike_count){
         if( strike_count[0] == 1){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal1);
-            img.setImageResource(R.drawable.strike);        }
+            img.setImageResource(R.drawable.ic_strike);        }
         else if (strike_count[0] == 2){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal2);
-            img.setImageResource(R.drawable.strike);        }
+            img.setImageResource(R.drawable.ic_strike);        }
         else if (strike_count[0] ==3){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal3);
-            img.setImageResource(R.drawable.strike);
+            img.setImageResource(R.drawable.ic_strike);
         }
     }
 

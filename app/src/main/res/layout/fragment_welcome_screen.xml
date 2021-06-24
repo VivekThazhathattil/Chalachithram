@@ -11,7 +11,7 @@
         android:id="@+id/loading_screen_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/loading_screen"
+        android:src="@drawable/ic_loading_screen"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/play" />
+            android:minHeight="150dp"
+            android:src="@drawable/ic_play" />
 
         <ImageButton
             android:id="@+id/settings_button"
@@ -43,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/settings" />
+            android:minHeight="150dp"
+            android:src="@drawable/ic_settings" />
 
     </LinearLayout>
 
@@ -51,6 +53,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/credits" />
+            android:src="@drawable/ic_credits" />
 
         <ImageButton
             android:id="@+id/share_button"
@@ -70,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/share" />
+            android:src="@drawable/ic_share" />
 
         <ImageButton
             android:id="@+id/rate_button"
@@ -78,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/rate" />
+            android:src="@drawable/ic_rate" />
 
         <ImageButton
             android:id="@+id/exit_button"
@@ -86,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/exit" />
+            android:src="@drawable/ic_exit" />
 
     </LinearLayout>
 

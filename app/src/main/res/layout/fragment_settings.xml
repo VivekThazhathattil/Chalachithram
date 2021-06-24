@@ -20,13 +20,11 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout7"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
+    <ImageButton
         android:id="@+id/go_back_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:text="തിരിച്ചു പോകുക"
-        android:textColor="#FFFFFF"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@+id/settings_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

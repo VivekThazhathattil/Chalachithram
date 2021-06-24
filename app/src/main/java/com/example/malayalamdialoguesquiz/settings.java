@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -74,7 +75,7 @@ public class settings extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button go_back = view.findViewById(R.id.go_back_button2);
+        ImageButton go_back = view.findViewById(R.id.go_back_button2);
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,14 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/play" />
+            app:srcCompat="@drawable/ic_play" />
 
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/settings" />
+            app:srcCompat="@drawable/ic_settings" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,27 +46,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/credits" />
+            app:srcCompat="@drawable/ic_credits" />
 
         <ImageButton
             android:id="@+id/share_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/share" />
+            app:srcCompat="@drawable/ic_share" />
 
         <ImageButton
             android:id="@+id/rate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/rate" />
+            app:srcCompat="@drawable/ic_rate" />
 
         <ImageButton
             android:id="@+id/exit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/exit" />
+            app:srcCompat="@drawable/ic_exit" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
