@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu">
+    tools:context="ml.vivekthazhathattil.chalachithram.menu">
 
     <ImageView
         android:id="@+id/menu_bg"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.malayalamdialoguesquiz.FirstFragment"
+        android:name="ml.vivekthazhathattil.chalachithram.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.malayalamdialoguesquiz.SecondFragment"
+        android:name="ml.vivekthazhathattil.chalachithram.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/menu"
-        android:name="com.example.malayalamdialoguesquiz.menu"
+        android:name="ml.vivekthazhathattil.chalachithram.menu"
         android:label="menu_fragment"
         tools:layout="@layout/menu_fragment"
         app:startDestination="@id/action_menu_to_game_mode">
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/game_mode"
-        android:name="com.example.malayalamdialoguesquiz.game_mode"
+        android:name="ml.vivekthazhathattil.chalachithram.game_mode"
         android:label="fragment_game_mode"
         tools:layout="@layout/fragment_game_mode" >
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcome_screen"
-        android:name="com.example.malayalamdialoguesquiz.welcome_screen"
+        android:name="ml.vivekthazhathattil.chalachithram.welcome_screen"
         android:label="fragment_welcome_screen"
         tools:layout="@layout/fragment_welcome_screen" >
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/credits"
-        android:name="com.example.malayalamdialoguesquiz.credits"
+        android:name="ml.vivekthazhathattil.chalachithram.credits"
         android:label="fragment_credits"
         tools:layout="@layout/fragment_credits" >
         <action
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.example.malayalamdialoguesquiz.settings"
+        android:name="ml.vivekthazhathattil.chalachithram.settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action

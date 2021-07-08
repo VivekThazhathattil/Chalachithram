@@ -1,0 +1,12 @@
+Chalachithram is an Android quiz app based on dialogues from popular movies of Malayalam film industry.
+
+It has over 700 dialogues with three time controls and an additional mode that one can unlock by obtaining more than 100 points for the toughest time control(Shaji Kailas round).
+
+The three time controls are:
+
+Shaji Kailas round (5 sec / question)
+Sadha round (15 sec / question )
+Amal Neerad round (30 sec / question)
+and the unlockable mode:
+Santosh Pandit round (2 sec / question)
+Score 200+ points in Santosh Pandit round to win the game.

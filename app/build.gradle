@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.malayalamdialoguesquiz"
+        applicationId "ml.vivekthazhathattil.chalachithram"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1

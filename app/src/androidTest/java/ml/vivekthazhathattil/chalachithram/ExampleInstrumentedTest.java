@@ -1,4 +1,4 @@
-package com.example.malayalamdialoguesquiz;
+package ml.vivekthazhathattil.chalachithram;
 
 import android.content.Context;
 

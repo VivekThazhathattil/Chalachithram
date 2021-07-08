@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings" >
+    tools:context="ml.vivekthazhathattil.chalachithram.settings" >
 
     <ImageView
         android:id="@+id/settings_bg"

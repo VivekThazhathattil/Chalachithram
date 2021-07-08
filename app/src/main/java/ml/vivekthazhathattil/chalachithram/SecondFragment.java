@@ -1,4 +1,4 @@
-package com.example.malayalamdialoguesquiz;
+package ml.vivekthazhathattil.chalachithram;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import org.w3c.dom.Text;
+import com.example.malayalamdialoguesquiz.R;
 
 public class SecondFragment extends Fragment {
 

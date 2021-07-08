@@ -1,22 +1,18 @@
-package com.example.malayalamdialoguesquiz;
+package ml.vivekthazhathattil.chalachithram;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.example.malayalamdialoguesquiz.R;
 
 
 /**
