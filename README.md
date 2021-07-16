@@ -15,7 +15,11 @@ Score 200+ points in Santosh Pandit round to win the game (which no sane man who
 
 ### Installation
 
-You can download the latest version of the app from [Releases](https://github.com/VivekThazhathattil/Chalachithram/releases). An effort to publish the app to F-Droid software repository is also underway.
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/ml.vivekthazhathattil.chalachithram/)
+
+You can also download it from the [Releases](https://github.com/VivekThazhathattil/Chalachithram/releases).
 
 ### Contribution
 
