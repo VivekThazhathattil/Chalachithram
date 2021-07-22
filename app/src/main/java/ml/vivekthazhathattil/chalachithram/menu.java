@@ -18,12 +18,6 @@ import android.widget.Toast;
 
 import com.example.malayalamdialoguesquiz.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link menu#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class menu extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,15 +32,6 @@ public class menu extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment menu.
-     */
-    // TODO: Rename and change types and number of parameters
     public static menu newInstance(String param1, String param2) {
         menu fragment = new menu();
         Bundle args = new Bundle();
@@ -125,7 +110,7 @@ public class menu extends Fragment {
             public void onClick(View view) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBody = "Hey! check out Malayalam Dialogue Quiz app on Google Playstore. I think you will like it!";
+                String shareBody = "Hey! check out Chalachithram app on F-Droid (https://f-droid.org/en/packages/ml.vivekthazhathattil.chalachithram/). I think you will like it!";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));

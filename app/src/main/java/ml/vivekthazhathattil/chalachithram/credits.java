@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.malayalamdialoguesquiz.R;
 
@@ -76,5 +78,8 @@ public class credits extends Fragment {
                         .navigate(R.id.action_credits_to_menu);
             }
         });
+
+        TextView link = (TextView) view.findViewById(R.id.textView2);
+        link.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
