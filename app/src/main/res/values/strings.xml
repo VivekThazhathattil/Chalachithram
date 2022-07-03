@@ -21,7 +21,7 @@
     </string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="how_to_play">
-        \n\nഈ കളി എങ്ങനെ കളിക്കാം?\n\n
+        \n\n<b>നിർദ്ദേശങ്ങൾ</b>\n\n
 
 പ്ലേ ബട്ടൺ (വട്ടത്തിനകത്തു ത്രികോണമുള്ള ഐക്കൺ)  അമർത്തി നിങ്ങൾക്ക് ഗെയിം മോഡ് തിരഞ്ഞെടുക്കാം. ഗെയിം മോഡ് മൂന്ന് വിധേനയാണ്:\n\n
 \'ഷാജി കൈലാസ്\' റൗണ്ടിൽ ഓരോ ഡയലോഗും ഏതു സിനിമയിൽ നിന്നാണെന്ന് ഊഹിക്കാൻ 5 സെക്കന്റ് മാത്രമേ നിങ്ങൾക്ക് ലഭിക്കുകയുള്ളൂ. \'സാധാ\' റൗണ്ടിൽ നിങ്ങൾക്ക് 15 സെക്കൻഡുകൾ കിട്ടുന്നതാണ്. അതെ സമയം \'അമൽ നീരദ്\' റൗണ്ടിൽ 30 സെക്കന്റോളം നിങ്ങൾക്ക് ഓരോ ഡയലോഗിനും എടുക്കാവുന്നതാണ്. എത്ര സമയം ബാക്കിയുണ്ടെന്ന് കാണുവാൻ കളി സ്‌ക്രീനിന്റെ മുകളിൽ വലത്തു വശം നോക്കിയാൽ മതി.
@@ -31,12 +31,13 @@
 
 ഈ കളിയിലെ ഏറ്റവും ബുദ്ധിമുട്ടേറിയ ഗെയിം മോഡ് ആൺ \'സന്തോഷ് പണ്ഡിറ്റ്\' റൗണ്ട്. ഓരോ ഡയലോഗിനും നിങ്ങൾക്ക് 2 സെക്കന്റ് മാത്രമേ ഊഹിക്കാൻ സമയം ലഭിക്കൂ. ഈ റൗണ്ട് അൺലോക്ക് ചെയ്യണമെങ്കിൽ ഷാജി കൈലാസ് റൗണ്ടിൽ നിങ്ങൾ 100-നു മുകളിൽ സ്കോർ നേടണം.
         ഗെയിം വിജയിക്കുന്നതിനായി സന്തോഷ് പണ്ഡിറ്റ് റൗണ്ടിൽ 200-നു മുകളിൽ സ്കോർ നേടണം. എന്താ, ഒരു കൈ നോക്കിയാലോ?
-        \n\n\n_____________________\n\n\n
-        Developed by Timekid studios\n
-        Programming : Vivek T\n
+        \n\n\n\n\n
+        Developed by : Vivek T\n
         Music :
         <a href="https://opengameart.org/content/jazz-flute">Alex McCulloch (Jazz - flute)</a>\n\n\n
-        Find the source code <a href="https://github.com/VivekThazhathattil/Chalachithram">here</a>\n
+        Find the source code at <a href="https://github.com/VivekThazhathattil/Chalachithram">github.com/VivekThazhathattil/Chalachithram</a>\n
+        \n\n
+        <u><b>Version: 1.3</b></u>
     </string>
 
     <!-- TODO: Remove or change this placeholder text -->

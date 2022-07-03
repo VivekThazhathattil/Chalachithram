@@ -84,27 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
         is_sp_active = get_data_from_memory();
         is_game_won = get_game_won_data_from_memory();
-        System.out.println("MainActivity: is_sp_active = " + is_sp_active);
 
             backgroundPlayer = new BackgroundPlayer(this, getResources().getIdentifier("jazz", "raw", getPackageName()));
     }
-
-/*    public void play_music(int choice){
-        int resID = getResources().getIdentifier("jazz", "raw", getPackageName());
-        MediaPlayer music = MediaPlayer.create(this,resID);
-        music.setLooping(true);
-        if (choice == 0) {// create and play music
-            music.start();
-        }
-        else if (choice == 1){ // pause music
-            music.pause();
-        }
-        else if (choice == 2){// resume music
-            music.start();
-        }
-        else // stop music
-            music.stop();
-    }*/
 
     public void play_sfx(int val){
         int resID;
