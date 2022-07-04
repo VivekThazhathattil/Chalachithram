@@ -32,6 +32,7 @@ public class SecondFragment extends Fragment {
         view.findViewById(R.id.to_menu_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) getActivity()).play_sfx(1);
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_menu);
             }

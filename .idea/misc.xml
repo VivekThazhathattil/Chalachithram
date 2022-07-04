@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/drawable/ic_credits.xml" value="0.22864583333333333" />
         <entry key="app/src/main/res/drawable/ic_exit.xml" value="0.22864583333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/drawable/ic_loading_screen.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/drawable/ic_no_strike.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.1" />

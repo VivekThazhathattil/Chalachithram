@@ -164,6 +164,7 @@ public class game_mode extends Fragment {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) getActivity()).play_sfx(1);
                 NavHostFragment.findNavController(game_mode.this)
                         .navigate(R.id.action_game_mode_to_menu);
             }

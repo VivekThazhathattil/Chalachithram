@@ -35,8 +35,11 @@ import java.util.List;
 import java.util.Random;
 
 public class FirstFragment extends Fragment {
-    boolean is_counter_running = false;
     CountDownTimer countDownTimer;
+    int ans_idx, count, strike_count;
+    ArrayList<MovieData> movie_data;
+    ArrayList<String> movie_list;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -48,15 +51,8 @@ public class FirstFragment extends Fragment {
     public class MovieData{
         public String dialogue;
         public String movie;
-
         public MovieData(String dialogue, String movie){
             this.dialogue = dialogue;
-            this.movie = movie;
-        }
-        public void set_dialogue(String dialogue){
-            this.dialogue = dialogue;
-        }
-        public void set_movie(String movie){
             this.movie = movie;
         }
     }
@@ -78,15 +74,16 @@ public class FirstFragment extends Fragment {
             toast.setMargin(0, 0);
             toast.show();
         }
-            // Apply the edits!
         editor.apply();
     }
 
     private void if_shaji_kailas_round_won(){
-        if(((MainActivity) getActivity()).final_score >= 100 && ((MainActivity) getActivity()).time_for_round == 5000){
+        if(((MainActivity) getActivity()).final_score >= 100 &&
+                ((MainActivity) getActivity()).time_for_round == 5000){
             store_data_in_local_memory();
         }
-        else if (((MainActivity) getActivity()).final_score >= 200 && ((MainActivity) getActivity()).time_for_round == 2000){
+        else if (((MainActivity) getActivity()).final_score >= 200 &&
+                ((MainActivity) getActivity()).time_for_round == 2000){
             store_data_in_local_memory();
         }
     }
@@ -108,8 +105,12 @@ public class FirstFragment extends Fragment {
         return json;
     }
 
-    private ArrayList<MovieData> get_movie_data(){
-        List<MovieData> movie_data = new ArrayList<MovieData>();
+    private String formatString(String str){
+        return str.replace('_', '\n');
+    }
+
+    private void get_movie_data(){
+        movie_data = new ArrayList<MovieData>();
         try{
             JSONArray json_array = new JSONArray(load_JSON_from_resources());
             JSONObject movie;
@@ -121,46 +122,38 @@ public class FirstFragment extends Fragment {
                 JSONArray json_dialogues = (JSONArray) movie.get("dialogues");
                 for(int j = 0; j < json_dialogues.length(); ++j){
                     dialogue = json_dialogues.getString(j);
-                    MovieData temp = new MovieData(dialogue, movie_name);
+                    MovieData temp = new MovieData(formatString(dialogue), movie_name);
                     movie_data.add(temp);
                 }
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
-        return (ArrayList<MovieData>) movie_data;
     }
 
-    private ArrayList<String> get_movie_names(){
-        // get a list of movies (for other options)
-        final ArrayList<String> movie_list = new ArrayList<String>();
+    private void get_movie_names(){
+        movie_list = new ArrayList<String>();
         try {
             JSONArray json_array = new JSONArray(load_JSON_from_resources());
             JSONObject movie;
             for(int i = 0; i < json_array.length(); ++i){
                 movie = json_array.getJSONObject(i);
                 movie_list.add(movie.getString("title"));
-                Log.println(1, "VivekHere!!!!", movie_list.get(i));
             }
-            return (ArrayList<String>) movie_list;
         }
         catch (JSONException e1) {
             Log.e("MainActivity", "Error", e1);
             e1.printStackTrace();
-            return null;
         }
     }
 
     private void set_question_text(View view, String dialogue){
         TextView dialogue_view =  view.findViewById(R.id.dialogue_text);
-        if (dialogue_view == null){
+        if (dialogue_view == null)
             System.out.println("dialogue_view is null");
-        }
         else {
             dialogue_view.setText(dialogue);
-            // show slide animation for textview
             Animation RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
             ScrollView scrollView = view.findViewById(R.id.scrollView2);
             scrollView.startAnimation(RightSwipe);
@@ -175,7 +168,6 @@ public class FirstFragment extends Fragment {
         final Button _option3 = view.findViewById(R.id.option3);
         final Button _option4 = view.findViewById(R.id.option4);
 
-        //give animation to options
         Animation RightSwipe;
         RightSwipe = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_option1);
         _option1.startAnimation(RightSwipe);
@@ -191,23 +183,24 @@ public class FirstFragment extends Fragment {
             if (movie_list.get(i).equals(correct_answer))
                 i++;
             else {
-                if (count == 0) {
-                    _option1.setText(movie_list.get(i));
-                    i++;
-                    count++;
-                } else if (count == 1) {
-                    _option2.setText(movie_list.get(i));
-                    i++;
-                    count++;
-                } else if (count == 2) {
-                    _option3.setText(movie_list.get(i));
-                    i++;
-                    count++;
-                } else if (count == 3) {
-                    _option4.setText(movie_list.get(i));
-                    i++;
-                    count++;
+                switch(count){
+                    case 0:
+                        _option1.setText(movie_list.get(i));
+                        break;
+                    case 1:
+                        _option2.setText(movie_list.get(i));
+                        break;
+                    case 2:
+                        _option3.setText(movie_list.get(i));
+                        break;
+                    case 3:
+                        _option4.setText(movie_list.get(i));
+                        break;
+                    default:
+                        break;
                 }
+                i++;
+                count++;
             }
         }
 
@@ -226,8 +219,8 @@ public class FirstFragment extends Fragment {
         return ans_index;
     }
 
-    private boolean check_ans_with_button(Integer[] ans_idx, Integer button_no) {
-        if (ans_idx[0] == button_no-1)
+    private boolean check_ans_with_button(Integer button_no) {
+        if (ans_idx == button_no-1)
             return true;
         else
             return false;
@@ -250,98 +243,112 @@ public class FirstFragment extends Fragment {
             view.findViewById(R.id.option4).setBackgroundColor(R.color.correct_answer_green);
     }
 
-    private void set_strike_color(View view, Integer[] strike_count){
-        if( strike_count[0] == 1){
+    private void set_strike_color(View view){
+        if( strike_count == 1){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal1);
             img.setImageResource(R.drawable.ic_strike);        }
-        else if (strike_count[0] == 2){
+        else if (strike_count == 2){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal2);
             img.setImageResource(R.drawable.ic_strike);        }
-        else if (strike_count[0] ==3){
+        else if (strike_count ==3){
             ImageView img= (ImageView) view.findViewById(R.id.strike_signal3);
             img.setImageResource(R.drawable.ic_strike);
         }
     }
 
-    private void strike_count_three_event(Integer[] count){
-        countDownTimer.cancel();
-        is_counter_running = false;
-        ((MainActivity) getActivity()).final_score = count[0] - 3;
+    private void strike_count_three_event(){
+        ((MainActivity) getActivity()).final_score = count - 3;
+        ans_idx = 0;
+        count = 0;
+        strike_count = 0;
         if_shaji_kailas_round_won();
         NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_SecondFragment);
     }
 
-    public void next_qcard_event(final View view, final Integer[] count,
-                                 final ArrayList<MovieData> movie_data,
-                                 final ArrayList<String> movie_list,
-                                 final Integer[] ans_idx,
-                                 final Integer[] strike_count){
-        if(is_counter_running && countDownTimer != null){
+    private void fail_answer_event(View view){
+        ((MainActivity) getActivity()).play_sfx(2);
+        TextView cdt = view.findViewById(R.id.count_down_timer);
+        cdt.setText("FIN");
+        strike_count++;
+        set_strike_color(view);
+    }
+
+    public void init_countdown_timer(final View view){
+        countDownTimer = new CountDownTimer(((MainActivity) getActivity()).time_for_round, 1000) {
+            public void onTick(long millisUntilFinished) {
+                ((MainActivity) getActivity()).play_sfx(4);
+                TextView cdt = view.findViewById(R.id.count_down_timer);
+                if (view.findViewById(R.id.count_down_timer) == null) {
+                    countDownTimer.cancel();
+                } else {
+                    cdt.setText("" + (millisUntilFinished / 1000 + 1));
+                }
+            }
+
+            public void onFinish() {
+                ((MainActivity) getActivity()).play_sfx(2);
+                TextView cdt = view.findViewById(R.id.count_down_timer);
+                cdt.setText("0");
+                strike_count++;
+                set_strike_color(view);
+                if(strike_count == 3)
+                    strike_count_three_event();
+                else{
+                    update_timer();
+                    next_qcard_event(view);
+                }
+            }
+        }.start();
+    }
+
+    private void update_timer(){
+        if(countDownTimer != null){
             countDownTimer.cancel();
-            is_counter_running = false;
+            countDownTimer.start();
         }
+    }
 
-        count[0]++;
+    public void next_qcard_event(final View view){
+        count++;
         TextView q_count =  view.findViewById(R.id.q_count);
-        q_count.setText(count[0].toString());
-
+        q_count.setText(String.valueOf(count));
 
         if(view == null)
             System.out.println("view is null");
         else {
-            set_question_text(view.getRootView(), movie_data.get(count[0] - 1).dialogue.toString());
-            ans_idx[0] = set_options_text(view.getRootView(), movie_list, movie_data.get(count[0] - 1).movie.toString());
+            System.out.println(count - 1);
+            set_question_text(view.getRootView(), movie_data.get(count - 1).dialogue.toString());
+            ans_idx = set_options_text(view.getRootView(), movie_list, movie_data.get(count - 1).movie.toString());
             view.findViewById(R.id.option1).setBackgroundResource(R.drawable.rounded_button);
             view.findViewById(R.id.option2).setBackgroundResource(R.drawable.rounded_button);
             view.findViewById(R.id.option3).setBackgroundResource(R.drawable.rounded_button);
             view.findViewById(R.id.option4).setBackgroundResource(R.drawable.rounded_button);
 
-
-            is_counter_running = true;
-            countDownTimer = new CountDownTimer(((MainActivity) getActivity()).time_for_round + 1000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    TextView cdt = view.findViewById(R.id.count_down_timer);
-                    if (view.findViewById(R.id.count_down_timer) == null) {
-                        countDownTimer.cancel();
-                    } else {
-                        cdt.setText("" + millisUntilFinished / 1000);
-                    }
-                }
-
-                public void onFinish() {
-                    ((MainActivity) getActivity()).play_sfx(2);
-                    is_counter_running = false;
-                    TextView cdt = view.findViewById(R.id.count_down_timer);
-                    cdt.setText("FIN");
-                    strike_count[0]++;
-                    set_strike_color(view, strike_count);
-                    if (strike_count[0] == 3)
-                        strike_count_three_event(count);
-                    else if (view.findViewById(R.id.option1) != null) {
-                        next_qcard_event(view, count, movie_data, movie_list, ans_idx, strike_count);
-                    }
-                }
-            }.start();
         }
     }
 
-    public void option_button_click_event(View view, Integer[] ans_idx, ArrayList<MovieData> movie_data,
-                        ArrayList<String> movie_list, Integer[] count, Integer[] strike_count,
-                        Integer option_clicked){
-        color_the_answers(view.getRootView(), ans_idx[0]);
-        if (check_ans_with_button(ans_idx, option_clicked)) {
+    public void option_button_click_event(View view, Integer option_clicked){
+        color_the_answers(view.getRootView(), ans_idx);
+        if (check_ans_with_button(option_clicked)) {
             ((MainActivity) getActivity()).play_sfx(3);
-            next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);
+            update_timer();
+            next_qcard_event(view.getRootView());
         }
         else{
             ((MainActivity) getActivity()).play_sfx(2);
-            strike_count[0] += 1;
-            set_strike_color(view.getRootView(), strike_count);
-            if(strike_count[0] == 3)
-                strike_count_three_event(count);
-            else
-                next_qcard_event(view.getRootView(), count, movie_data, movie_list, ans_idx, strike_count);               }
+            strike_count++;
+            set_strike_color(view.getRootView());
+            if(strike_count == 3){
+                if(countDownTimer != null)
+                    countDownTimer.cancel();
+                strike_count_three_event();
+            }
+            else{
+                update_timer();
+                next_qcard_event(view.getRootView());
+            }
+        }
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -353,65 +360,54 @@ public class FirstFragment extends Fragment {
         ImageView ingame_bg = view.findViewById(R.id.in_game_bg);
         switch (rand_bg_idx){
             case 0:
-                ingame_bg.setImageResource(R.drawable.in_game_bg);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg); break;
             case 1:
-                ingame_bg.setImageResource(R.drawable.in_game_bg2);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg2); break;
             case 2:
-                ingame_bg.setImageResource(R.drawable.in_game_bg3);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg3); break;
             case 3:
-                ingame_bg.setImageResource(R.drawable.in_game_bg4);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg4); break;
             case 4:
-                ingame_bg.setImageResource(R.drawable.in_game_bg5);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg5); break;
             case 5:
-                ingame_bg.setImageResource(R.drawable.in_game_bg6);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg6); break;
             case 6:
-                ingame_bg.setImageResource(R.drawable.in_game_bg7);
-                break;
+                ingame_bg.setImageResource(R.drawable.in_game_bg7); break;
             default:
                 throw new IllegalStateException("Unexpected value: " + rand_bg_idx);
         }
 
-        final Integer[] ans_idx = new Integer[1];
-        final Integer[] count = {0};
-        final Integer[] strike_count = {0};
-
-        final ArrayList<String> movie_list = get_movie_names();
-        final ArrayList<MovieData> movie_data = get_movie_data();
+        get_movie_names();
+        get_movie_data();
         Collections.shuffle(movie_data);
 
-        next_qcard_event(view, count, movie_data, movie_list, ans_idx, strike_count);
-
+        init_countdown_timer(view);
+        next_qcard_event(view);
         view.findViewById(R.id.option1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                option_button_click_event(view, ans_idx, movie_data, movie_list, count, strike_count, 1);
+                option_button_click_event(view, 1);
             }
         });
 
         view.findViewById(R.id.option2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                option_button_click_event(view, ans_idx, movie_data, movie_list, count, strike_count, 2);
+                option_button_click_event(view, 2);
             }
         });
 
         view.findViewById(R.id.option3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                option_button_click_event(view, ans_idx, movie_data, movie_list, count, strike_count, 3);
+                option_button_click_event(view, 3);
             }
         });
 
         view.findViewById(R.id.option4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                option_button_click_event(view, ans_idx, movie_data, movie_list, count, strike_count, 4);
+                option_button_click_event(view, 4);
             }
         });
     }

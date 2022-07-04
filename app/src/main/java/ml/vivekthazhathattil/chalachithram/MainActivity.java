@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
                 resID = getResources().getIdentifier("wrong", "raw", getPackageName());
             else if (val == 3) // for correct answer
                 resID = getResources().getIdentifier("correct", "raw", getPackageName());
+            else if (val == 4)
+                resID = getResources().getIdentifier("tick", "raw", getPackageName());
             else // any other cases
                 resID = getResources().getIdentifier("woosh", "raw", getPackageName());
             System.out.println("resID = " + resID);

@@ -31,6 +31,7 @@
 
         <ImageButton
             android:id="@+id/play_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,6 +41,7 @@
 
         <ImageButton
             android:id="@+id/settings_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -61,6 +63,7 @@
 
         <ImageButton
             android:id="@+id/credits_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,6 +72,7 @@
 
         <ImageButton
             android:id="@+id/share_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -77,6 +81,7 @@
 
         <ImageButton
             android:id="@+id/rate_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -85,6 +90,7 @@
 
         <ImageButton
             android:id="@+id/exit_button"
+            style="@style/DefaultButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -80,6 +80,7 @@ public class menu extends Fragment {
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) getActivity()).play_sfx(1);
                 NavHostFragment.findNavController(menu.this)
                         .navigate(R.id.action_menu_to_game_mode);
             }
@@ -99,6 +100,7 @@ public class menu extends Fragment {
         credits_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) getActivity()).play_sfx(1);
                 NavHostFragment.findNavController(menu.this)
                         .navigate(R.id.action_menu_to_credits);
             }
@@ -121,6 +123,7 @@ public class menu extends Fragment {
         settings_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity) getActivity()).play_sfx(1);
                 NavHostFragment.findNavController(menu.this)
                         .navigate(R.id.action_menu_to_settings);
             }

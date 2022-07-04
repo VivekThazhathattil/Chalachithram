@@ -5,14 +5,18 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEBBC"
     tools:context="ml.vivekthazhathattil.chalachithram.welcome_screen">
 
     <ImageView
         android:id="@+id/loading_screen_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_loading_screen"
+        android:background="#FFEBBC"
         android:scaleType="fitXY"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_loading_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
